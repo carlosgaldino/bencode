@@ -34,7 +34,8 @@ encode_string_test() ->
     ?assertEqual(<<"10:bittorrent">>, bencode:encode(<<"bittorrent">>)).
 
 encode_map_test() ->
-    ?assertEqual(<<"d7:bencodei43e6:decode3:abce">>, bencode:encode(#{"bencode" => 43, "decode" => "abc"})).
+    ?assertEqual(<<"d7:bencodei43e6:decode3:abce">>, bencode:encode(#{"bencode" => 43, "decode" => "abc"})),
+    ?assertEqual(<<"d3:abci1e3:defi3e3:xyzi2ee">>, bencode:encode(#{"def" => 3, "xyz" => 2, "abc" => 1})).
 
 encode_list_test() ->
     ?assertEqual(<<"li1ei2ei3e7:bencodee">>, bencode:encode([1, 2, 3, <<"bencode">>])).
