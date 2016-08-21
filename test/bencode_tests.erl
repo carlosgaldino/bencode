@@ -20,6 +20,10 @@ decode_error_extra_test() ->
     ?assertEqual({error, extra_data}, bencode:decode(<<"li1eei3e">>)),
     ?assertEqual({error, extra_data}, bencode:decode(<<"d7:bencodei43ee10:bittorrent">>)).
 
+decode_error_invalid_test() ->
+    ?assertEqual({error, invalid_data}, bencode:decode(<<"abcde">>)),
+    ?assertEqual({error, invalid_data}, bencode:decode(<<"l4:abcdi3e">>)). % missing "e" terminator for list.
+
 encode_int_test() ->
     ?assertEqual(<<"i-3e">>, bencode:encode(-3)),
     ?assertEqual(<<"i53e">>, bencode:encode(53)),

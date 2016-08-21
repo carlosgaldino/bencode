@@ -7,11 +7,14 @@
 %% API functions
 %%====================================================================
 decode(Data) ->
-    case dec(Data) of
+    try dec(Data) of
         {Out, <<>>} ->
             {ok, Out};
         {_, <<_/binary>>} ->
             {error, extra_data}
+    catch
+        _Error:_Reason ->
+            {error, invalid_data}
     end.
 
 encode(Data) ->
